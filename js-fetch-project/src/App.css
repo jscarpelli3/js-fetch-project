@@ -1,0 +1,94 @@
+/* VARS */
+:root {
+  --body: rgb(252, 0, 0);
+  --text: #000000;
+  --textB: #5e5b78;
+  --header-bg: #5fbbe2;
+  --link: rgb(103, 103, 103);
+  --link-hover: rgb(61, 61, 61);
+  --link-active: rgb(93, 59, 59);
+  --button-bg: rgb(169, 169, 169);
+  --card-bg: rgb(255, 251, 0);
+
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* APP */
+.App {
+  background-color: var(--body);
+  text-align: center;
+}
+
+hr {
+  margin: 0;
+}
+
+.header-container {
+  margin: 0;
+  width: 100%;
+  height: 44vh;
+}
+
+.card-container {
+  margin: 0;
+  width: 100%;
+}
+
+/* Header */
+.header-box {
+  margin: 0;
+}
+
+.header-logo {
+  height: 30vh;
+}
+
+/* INPUT */
+.input-container {
+  margin: 0;
+}
+
+/* FORM */
+
+.submit-form-buttong {
+  background-color: #5fbbe2;
+  color: #000000;
+}
+
+/* BUTTON */
+.button-box {
+  margin: 0;
+}
+
+.button {
+  margin: 0;
+}
+
+/* CARD */
+
+.card-box {
+  margin: 0;
+  width: 10rem;
+  max-width: 18vw;
+  background-color: var(--card-bg);
+}
+
+.card-name {
+  margin: 0;
+}
+
+.card-img {
+  margin: 0;
+}
+
+.card-age {
+  margin: 0;
+}
+
+.card-breed {
+  margin: 0;
+}
+
+.card-loc {
+  margin: 0;
+}
