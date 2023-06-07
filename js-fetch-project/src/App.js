@@ -1,15 +1,16 @@
 import React from 'react'
+
 import { useState, useEffect } from 'react'
 import Header from './components/Header'
 import LogForm from './components/LogForm'
 import Card from './components/Card'
 import Input from './components/Input'
 import './App.css'
-import { login, logout } from './utils/api'
+
 
 function App() {
   const [user, setUser] = useState([])
-  const [logged, setLogged] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false)
   const [fetchedData, setFetchedData] = useState(false)
 
 
@@ -17,16 +18,17 @@ function App() {
   return (
     <div className="App">
       <header className="header-container">
-        <Header loggedIn/>
+        <Header setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>
      </header>
      <hr/>
-      {logged ? 
+      {loggedIn ? 
         <div className="card-container">
+          YOU ARE LOGGED IN
           <Input />
         </div> 
         : 
         <div>
-          <LogForm loggedIn={logged}/>
+          <LogForm setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>
         </div>}
     </div>
   )

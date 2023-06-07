@@ -1,11 +1,15 @@
 import React from 'react'
+import { useState } from 'react'
+import { logout } from '../utils/api.ts'
 import logo from './../images/bark.png'
 import Button from './Button'
 
 
-const Header = ({ loggedIn }) => {
-  const handleLogout = (e) => {
-    console.log('LogOut clicked')
+const Header = ({ setLoggedIn,loggedIn }) => {
+  const [logoutError, setLogoutError] = useState(false)
+
+  const handleLogout = async (e) => {
+    logout(setLoggedIn, setLogoutError)
   }
 
   return (
@@ -16,6 +20,7 @@ const Header = ({ loggedIn }) => {
       ) : (
         <h3>Please Log In</h3>
       )}
+      {logoutError ? <p className='log-error'>Error       Logging Out</p> : null}
     </div>
   )
 }
