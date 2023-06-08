@@ -1,11 +1,12 @@
 import React from 'react'
-import { useNavigate, BrowserRouter } from 'react-router-dom'
+import { useNavigate, Routes, Route } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Header from './components/Header'
-import LogForm from './components/LogForm'
+import LandingPage from './components/LandingPage'
 import Card from './components/Card'
 import Input from './components/Input'
 import SearchPage from './components/SearchPage'
+import AboutPage from './components/AboutPage'
 import './App.css'
 
 function App() {
@@ -18,29 +19,23 @@ function App() {
       <header className="header-container">
         <Header setLoggedIn={setLoggedIn} loggedIn={loggedIn} />
       </header>
-      <hr />
-      <BrowserRouter>
-        <Route
-          path="/"
-          element={<LogForm setLoggedIn={setLoggedIn} loggedIn={loggedIn} />}
-        />
-        <Route 
-          path="/search" 
-          element={<SearchPage />}/>
-        <Route 
-          path="/about" 
-          element={<AboutPage />} />
-      </BrowserRouter>
-
-        {/* {loggedIn ? 
-        <div className="card-container">
-          YOU ARE LOGGED IN
-          <Input />
-        </div> 
-        : 
-        <div>
-          <LogForm setLoggedIn={setLoggedIn} loggedIn={loggedIn}/>
-        </div>} */}
+      <main className="main-box">
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <LandingPage
+                setLoggedIn={setLoggedIn}
+                loggedIn={loggedIn}
+                setUser={setUser}
+                user={user}
+                />
+              }
+              />
+          <Route path="/search" element={<SearchPage loggedIn={loggedIn} />} />
+          <Route path="/about" element={<AboutPage loggedIn={loggedIn} />} />
+        </Routes>
+      </main>
     </div>
   )
 }

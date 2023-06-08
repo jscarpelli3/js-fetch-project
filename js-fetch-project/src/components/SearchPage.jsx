@@ -1,8 +1,22 @@
 import React from 'react'
+import {useState, useEffect} from'react'
+import { useNavigate } from 'react-router-dom';
+import Input from './Input'
 
-const SearchPage = () => {
+const SearchPage = ({loggedIn}) => {
+const navigate = useNavigate()
+  
+useEffect(() => {
+   if(!loggedIn){
+     navigate('/')
+  }
+});
+  
+
   return (
-    <div>SearchPage</div>
+    <div>
+      <Input />
+    </div>
   )
 }
 

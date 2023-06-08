@@ -1,46 +1,30 @@
 import React from 'react'
-import { useState } from 'react'
-import { login } from '../utils/api.js'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { login } from '../utils/api.ts'
 import Input from './Input.jsx'
 import Button from './Button.jsx'
 
-const LogForm = ({ setLoggedIn, loggedIn }) => {
+const LogForm = ({ setLoggedIn, setUser, loggedIn }) => {
   const [formData, setFormData] = useState({ name: '', email: '' })
   const [loginError, setLoginError] = useState(false)
+  const navigate = useNavigate()
 
   const handleChange = (name, value) => {
     setFormData({ ...formData, [name]: value })
   }
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault()
-    console.log(formData)
-    login(formData, setLoggedIn, setLoginError)
+    try {
+      await login(formData)
+      setUser(formData.name)
+      setLoggedIn(true)
+      navigate('/search')
+    } catch (error) {
+      setLoginError(true)
+    }
   }
-
-  // const login = async () => {
-  //   console.log('trying to login')
-  //   try {
-  //     const response = await fetch(`https://frontend-take-home-service.fetch.com/auth/login`, {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify(formData),
-  //       credentials: 'include'
-  //     })
-
-  //     if (response.ok) {
-  //       setLoggedIn(true)
-  //       console.log('OK!!!')
-  //     } else {
-  //       setLoginError(true)
-  //       console.log('Error Logging In')
-  //     }
-  //   } catch (error) {
-  //     console.log('Network Error', error)
-  //   }
-  // }
 
   return (
     <div className="logform-box">
@@ -57,7 +41,7 @@ const LogForm = ({ setLoggedIn, loggedIn }) => {
           placeholderValue="enter your email"
           handleChange={handleChange}
         />
-        <Button onClickBool={false} buttonType="submit" buttonText="Login" />
+        <Button disabled={formData.name && formData.email ? false : true} onClickBool={false} buttonType="submit" buttonText="Login" />
       </form>
       {loginError ? (
         <p className="log-error">Login Error!</p>

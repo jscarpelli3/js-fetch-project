@@ -1,11 +1,9 @@
 const BASE_URL: string = 'https://frontend-take-home-service.fetch.com'
 
+
 const login = async (
   formData: object,
-  loginSet: Function,
-  errorSet: Function
-): Promise<void> => {
-  console.log('trying to login')
+  ): Promise<void> => {
   try {
     const response = await fetch(`${BASE_URL}/auth/login`, {
       method: 'POST',
@@ -17,10 +15,8 @@ const login = async (
     })
 
     if (response.ok) {
-      loginSet(true)
       console.log('Logged in!')
     } else {
-      errorSet(true)
       console.log('Error Logging In')
     }
   } catch (error) {
@@ -28,10 +24,7 @@ const login = async (
   }
 }
 
-const logout = async (
-  loginSet: Function,
-  errorSet: Function
-): Promise<void> => {
+const logout = async (): Promise<void> => {
   try {
     const response = await fetch(`${BASE_URL}/auth/logout`, {
       method: 'POST',
@@ -39,7 +32,8 @@ const logout = async (
     })
 
     if (response.ok) {
-      loginSet(false)
+
+      console.log('logged out')
     } else {
       errorSet(true)
       console.log('Error Logging Out')
