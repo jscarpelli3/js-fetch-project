@@ -12,7 +12,7 @@ import './App.css'
 function App() {
   const [user, setUser] = useState([])
   const [loggedIn, setLoggedIn] = useState(false)
-  const [fetchedData, setFetchedData] = useState(false)
+ 
 
   return (
     <div className="App">
