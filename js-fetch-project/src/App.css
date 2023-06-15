@@ -8,7 +8,7 @@
   --link-hover: rgb(255, 255, 255);
   --link-active: rgb(120, 112, 88);
   --button-bg: rgb(169, 169, 169);
-  --card-bg: rgb(255, 251, 0);
+  --card-bg: rgb(135, 218, 243);
 }
 
 /* APP */
@@ -48,9 +48,14 @@ hr {
   width: 100%;
 }
 
-.card-container {
+.cards-container {
   margin: 0;
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* align-items: center; */
 }
 
 .log-error {
@@ -59,7 +64,6 @@ hr {
 
 .welcome-note {
   margin: 0;
-
 }
 
 /* Header */
@@ -129,28 +133,35 @@ input {
 /* CARD */
 
 .card-box {
-  margin: 0;
-  width: 10rem;
-  max-width: 18vw;
   background-color: var(--card-bg);
+  margin: 1rem;
+  width: 10rem;
+  max-width: 20vw;
+  border-radius: 4px;
+  /* font-family: 'Poppins'; */
 }
 
 .card-name {
+  font-weight: 600;
   margin: 0;
 }
 
 .card-img {
   margin: 0;
+  max-width: 100%;
 }
 
 .card-age {
+  font-weight: 300;
   margin: 0;
 }
 
 .card-breed {
+  font-weight: 300;
   margin: 0;
 }
 
 .card-loc {
+  font-weight: 200;
   margin: 0;
 }

@@ -1,23 +1,18 @@
 import React from 'react'
 import {useState, useEffect} from'react'
 import { useNavigate } from 'react-router-dom';
-import { search } from '../utils/api.ts'
+import { search, retrieveDogs } from '../utils/api.ts'
 import Input from './Input'
 import Button from './Button.jsx';
+import Card from './Card.jsx';
 
 const SearchPage = ({loggedIn}) => {
   const [searchParams, setSearchParams] = useState({})
   const [fetchedData, setFetchedData] = useState({})
-  const [dogs, setDogs] = useState({})
+  const [dogs, setDogs] = useState([])
+  const [dogIds, setDogIds] = useState({})
   const [fetched, setFetched] = useState(false)
   const navigate = useNavigate()
-
-  //https://example.com/search?query=apple&category=fruits &color[]=red &color[]=green &color[]=yellow
-
-//   const searchArray = ['item1', 'item2', 'item3'];
-// const encodedSearchArray = encodeURIComponent(searchArray.join(','));
-
-
 
 
 const handleSearch = async (e) => {
@@ -33,13 +28,33 @@ const handleSearch = async (e) => {
   }
 }
 
-
-  
-useEffect(() => {
-   if(!loggedIn){
-     navigate('/')
+const getAllDogs = async () => {
+  try {
+    return await search()
+  } catch {
+    console.log('could not get dogs')
   }
-});
+}
+
+const retrieveCurrentDogs = async (dogIds) => {
+  console.log('retrieving dogs...')
+  try {
+    const currentDogs = await retrieveDogs(dogIds)
+    setDogs(currentDogs)
+  } catch {
+    console.log('could not get current dogs!')
+  }
+}
+
+const handleGetDogs = async () => {
+  const dataFetched = await getAllDogs()
+  setDogIds(dataFetched)
+  console.log(dataFetched.resultIds)
+  const dogsFetched = await retrieveCurrentDogs(dataFetched.resultIds)
+  console.log(dogs)
+}
+
+
   
 
   return (
@@ -49,21 +64,21 @@ useEffect(() => {
         <Input />
         <Button buttonType='submit' buttonText='Search'/>
       </div>
+      <button onClick={handleGetDogs}>See All Available Dogs</button>
       <div className="cards-container">
-      {fetched ? 
-      // dogs.map((dog)=>{
-      //   return(
-      //     <div className="card-box" key={dog.id}>
-      //     <Card />
-      //   )
-      // })
-      <div>
-      'HELLO, THIS IS A LIST'
-          </div>
+      {dogs.length > 0 ? 
+      dogs.map((dog)=> {
+        return(
+          <Card 
+            img={dog.img}
+            name={dog.name}
+            age={dog.age}
+            zip_code={dog.zip_code}
+            breed={dog.breed} />
+        )})    
       : 
-      <div>
-      'This did not work' 
-      </div>}
+      null
+      }
     </div>
   </div>
   )
